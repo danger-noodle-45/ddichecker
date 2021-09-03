@@ -26,15 +26,19 @@ router.post('/logout',
   res.status(200).send('Logged out!');
 })
 
-router.post('/addRx', rxController.getRx, 
+router.post('/addRx', 
+  rxController.getRx,
+  // userController.checkRxExists,
   userController.addRx, 
   (req, res) => {
   res.status(200).json( res.locals.id );
 })
 
-router.post('/deleteRx', userController.deleteRx, 
+router.patch('/deleteRx', 
+  userController.deleteRx, 
   (req, res) => {
-  res.status(200).send('Deleted!');
-})
+    return res.sendStatus(200);
+  }
+)
 
 export default router;

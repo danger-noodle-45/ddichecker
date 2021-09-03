@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SignupButton = props => {
     return (
         <div id='SignupButton'>
-            <button onClick={props.formHandleClick}>Sign Up</button>
+            <Link to={'/signup'}>
+                <button>Sign Up</button>
+            </Link>
         </div>
     );
 };

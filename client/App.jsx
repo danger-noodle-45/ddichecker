@@ -5,8 +5,13 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
-        return <div><HomeContainer /></div>
+        return (
+        <div>
+            <HomeContainer />
+        </div>
+        )
     }
 };
 

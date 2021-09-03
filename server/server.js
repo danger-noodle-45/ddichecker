@@ -10,9 +10,8 @@ import rxRouter from './routes/rxRouter.js';
 const app = express();
 const PORT = 3000;
 
-app.use(cookieParser());
-
 app.use(json())
+app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
 app.use('/user', userRouter);

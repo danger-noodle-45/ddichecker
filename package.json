@@ -6,7 +6,8 @@
   "scripts": {
     "start": " cross-env NODE_ENV=production nodemon --exec babel-node server/server.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --open\"  \"nodemon server/server.js\""
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --open\"  \"nodemon --exec babel-node server/server.js\"",
+    "test": "jest --verbose --updateSnapshot"
   },
   "repository": {
     "type": "git",
@@ -31,14 +32,19 @@
     "css-loader": "^6.2.0",
     "node-forge": "^0.10.0",
     "nodemon": "^2.0.12",
+    "puppeteer": "^9.1.1",
     "react-test-renderer": "^17.0.2",
+    "redux-mock-store": "^1.5.4",
+    "regenerator-runtime": "^0.13.9",
     "style-loader": "^3.2.1",
+    "supertest": "^6.1.6",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.0.0",
     "webpack-hot-middleware": "^2.25.0"
   },
   "dependencies": {
     "@babel/node": "^7.14.9",
+    "@shelf/jest-mongodb": "^2.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
@@ -54,8 +60,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
+    "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
     "webpack": "^5.51.1"
+  },
+  "jest": {
+    "preset": "@shelf/jest-mongodb"
   }
 }

@@ -6,10 +6,8 @@ userController.createUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     await User.create({ username, password, rxs: []})
-    
     return next();
   } catch (err) {
-    
     return next({ err })
   }
 };
@@ -30,9 +28,7 @@ userController.verifyUser = async (req, res, next) => {
     if (res.locals.user) {
       const { password } = req.body;
       const user = res.locals.user;
-
       const match = await user.comparePasswords(password, user.password);
-
       res.locals.match = match;
       if (!match) {
         res.locals.user.rx = [];
@@ -50,25 +46,31 @@ userController.verifyUser = async (req, res, next) => {
 
 userController.logOut = async (req, res, next) => {
   try {
-    console.log('Logging user out!')
     return next();
-
   } catch (err) {
     return next({ err })
   }
 };
 
+// userController.checkRxExists = async (req, res, next) => {
+//   try {
+
+//   } catch (err) {
+//     return next({ err });
+//   }
+// }
+
 userController.addRx = async (req, res, next) => {
   try {
     const { userId, rx } = req.body;
     const { id } = res.locals.rxs[0];
-
     const user = await User.findOneAndUpdate( 
       {_id: userId}, 
       {$push: {
         rxs: {name: rx[0], rxId: id}
       }}, 
-      {new: true}).exec();
+      {new: true}
+    ).exec();
 
     res.locals.id = id;
     
@@ -79,20 +81,17 @@ userController.addRx = async (req, res, next) => {
   }
 };
 
+
 userController.deleteRx = async (req, res, next) => {
   try {
-    console.log("deleteRx user!")
-    const { id } = req.body;
-    
+    const { medData, userId } = req.body;
     const user = await User.findOneAndUpdate( 
-      {username}, 
+      {_id: userId}, 
       {$pull: {
-        rxs: {rxId: id}
+        rxs: {name: medData}
       }}, 
-      {new: true}).exec();
-    
+      {new: true});
     return next();
-
   } catch (err) {
     return next({ err })
   }

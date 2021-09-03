@@ -12,7 +12,7 @@ const userSchema = new Schema({
     rxId: String,
     name: String
   }]
-})
+});
 
 userSchema.pre('save', async function(next) {
   try {
@@ -27,7 +27,7 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.comparePasswords = async function (input, stored) {
   try {
-    return await bcrypt.compare(input, stored)
+    return await bcrypt.compare(input, stored);
     
   } catch (err) {
     return next({ err });
